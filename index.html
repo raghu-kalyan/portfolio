@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Palasa Raghu Kalyan | Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar" data-aos="fade-down">
+    <div class="container nav-container">
+      <h1 class="logo">Raghu Kalyan</h1>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="mode-toggle">🌙</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero-section" data-aos="fade-up">
+    <div class="container hero-content">
+      <img src="https://res.cloudinary.com/dwrdymsia/image/upload/v1750832091/PassportPic_ihlo0z.jpg" alt="Palasa Raghu Kalyan" class="profile-pic" />
+      <h1>Hello, I'm <span>Palasa Raghu Kalyan</span></h1>
+      <p>Aspiring Full Stack Developer passionate about Python & Web Development</p>
+      <a href="#projects" class="btn">View My Work</a>
+    </div>
+  </header>
+
+  <section id="about" class="about-section" data-aos="fade-right">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>Hi, I'm a Full Stack Developer passionate about Python and web technologies. I’ve built smart IoT systems, resume parsing tools, and full-featured websites. I'm always exploring, learning, and focused on creating meaningful tech experiences.</p>
+    </div>
+  </section>
+
+  <section id="skills" class="skills-section">
+    <div class="container">
+      <h2 data-aos="fade-up">Technical Skills</h2>
+      <ul class="skills">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>Django</li>
+        <li>MySQL</li>
+        <li>REST APIs</li>
+        <li>GitHub</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <h2 data-aos="fade-up">Projects</h2>
+      <div class="project-card" data-aos="fade-left">
+        <h3>IoT - Home Security System</h3>
+        <p>Built a smart home security solution with sensors and cloud-based alerts using Python and IoT protocols.</p>
+      </div>
+      <div class="project-card" data-aos="fade-right">
+        <h3>Resume Parser (HR Tool)</h3>
+        <p>Python-based resume parser using NLP libraries like spaCy to extract candidate information from PDFs.</p>
+      </div>
+      <div class="project-card" data-aos="fade-left">
+        <h3>eCommerce Website</h3>
+        <p>Developed a complete eCommerce site with HTML, CSS, JS – includes product browsing, dynamic cart, and checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="experience-section" data-aos="fade-up">
+    <div class="container">
+      <h2>Experience</h2>
+      <div class="experience-card" data-aos="zoom-in">
+        <h3>InternPe</h3>
+        <h4>Python Programming-Internship</h4>
+        <p><strong>Duration:</strong> 1 Month</p>
+        <p>Worked on Python scripts for automation and data handling. Improved logic building and backend code flow during this internship.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="education-section" data-aos="zoom-in">
+    <div class="container">
+      <h2>Education</h2>
+      <ul class="education-list">
+        <li><strong>B.Tech</strong> - Kallam Haranadha Reddy Institute of Technology (CGPA: 7.37)</li>
+        <li><strong>Intermediate</strong> - Sri Chaitanya Junior College (CGPA: 6.09)</li>
+        <li><strong>SSC</strong> - Sri Chaitanya E.M High School (GPA: 10.0)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section" data-aos="fade-up">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:raghukalyan0410@gmail.com">raghukalyan0410@gmail.com</a></p>
+      <p>Phone: <a href="tel:+917672082959">+91-7672082959</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/raghu-kalyan-palasa/" target="_blank">raghu-kalyan-palasa</a></p>
+    </div>
+  </section>
+
+  <footer data-aos="fade-up">
+    <p>© 2025 Palasa Raghu Kalyan</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+    document.getElementById("mode-toggle").addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      document.getElementById("mode-toggle").textContent = isLight ? "☀️" : "🌙";
+    });
+  </script>
+</body>
+</html>
