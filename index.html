@@ -1,122 +1,798 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Palasa Raghu Kalyan | Portfolio</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Raghu Kalyan | Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0b0c10;
+    --surface: #13141a;
+    --card: #1a1b23;
+    --accent: #00e5ff;
+    --accent2: #7b61ff;
+    --text: #eef0f8;
+    --muted: #8a8fa8;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 6%;
+    backdrop-filter: blur(16px);
+    background: rgba(11,12,16,0.75);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #0b0c10 !important;
+    padding: 0.45rem 1.2rem;
+    border-radius: 100px;
+    font-weight: 600 !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 6% 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+    top: -200px; right: -100px;
+    pointer-events: none;
+    animation: pulseGlow 6s ease-in-out infinite alternate;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,97,255,0.1) 0%, transparent 70%);
+    bottom: -100px; left: -80px;
+    pointer-events: none;
+    animation: pulseGlow 8s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes pulseGlow {
+    from { transform: scale(1); opacity: 1; }
+    to   { transform: scale(1.15); opacity: 0.7; }
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--accent);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content: '●'; font-size: 0.5rem; animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 520px;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0b0c10;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 24px rgba(0,229,255,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,229,255,0.45); }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(0,229,255,0.05); }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .stat-item .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .stat-item .num span { color: var(--accent); }
+  .stat-item .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.1rem; }
+  
+  /* Hero avatar card */
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    min-width: 240px;
+    animation: fadeUp 0.7s 0.2s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #0b0c10;
+  }
+  .hero-card h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; }
+  .hero-card p { font-size:0.82rem; color:var(--muted); margin-top:0.3rem; }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.15);
+    color: var(--accent);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    margin-top: 1rem;
+  }
+  .status-pill::before { content:'●'; font-size:0.45rem; animation: blink 1.5s infinite; }
+  .skill-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+  .badge {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .badge:hover { border-color: var(--accent); color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 6%; }
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--muted); max-width: 550px; font-weight: 300; }
+  .section-header { margin-bottom: 3.5rem; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--surface); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .skill-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,229,255,0.25);
+    box-shadow: 0 12px 40px rgba(0,229,255,0.07);
+  }
+  .skill-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .skill-card h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.05rem; margin-bottom:0.5rem; }
+  .skill-card p { color: var(--muted); font-size:0.88rem; font-weight:300; }
+  .skill-bar-wrap { margin-top: 1.2rem; }
+  .skill-bar-label { display:flex; justify-content:space-between; font-size:0.78rem; color:var(--muted); margin-bottom:0.4rem; }
+  .skill-bar-track { background: rgba(255,255,255,0.06); border-radius:100px; height:4px; overflow:hidden; }
+  .skill-bar-fill { height:100%; border-radius:100px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 1s ease; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .project-card:hover { transform: translateY(-5px); border-color: rgba(0,229,255,0.25); }
+  .project-thumb {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-body { padding: 1.8rem; }
+  .project-tags { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.8rem; }
+  .project-tag {
+    background: rgba(0,229,255,0.08);
+    color: var(--accent);
+    font-size:0.72rem;
+    font-weight:600;
+    padding:0.2rem 0.7rem;
+    border-radius:100px;
+  }
+  .project-body h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:0.5rem; }
+  .project-body p { color:var(--muted); font-size:0.88rem; font-weight:300; line-height:1.7; }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent);
+    font-size:0.85rem;
+    font-weight:600;
+    text-decoration:none;
+    margin-top:1.2rem;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap:0.7rem; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--surface); }
+  .timeline { position:relative; padding-left:2rem; }
+  .timeline::before {
+    content:'';
+    position:absolute;
+    left:0; top:8px; bottom:8px;
+    width:2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+  .timeline-item {
+    position:relative;
+    margin-bottom:3rem;
+    padding-left:2rem;
+  }
+  .timeline-item::before {
+    content:'';
+    position:absolute;
+    left:-2.6rem; top:6px;
+    width:14px; height:14px;
+    border-radius:50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(0,229,255,0.5);
+  }
+  .timeline-date {
+    font-size:0.78rem;
+    color:var(--accent);
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:0.4rem;
+  }
+  .timeline-item h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.2rem; }
+  .timeline-item .company { color:var(--muted); font-size:0.9rem; margin-bottom:0.8rem; }
+  .timeline-item ul { list-style:none; }
+  .timeline-item ul li {
+    color:var(--muted);
+    font-size:0.9rem;
+    font-weight:300;
+    padding:0.3rem 0;
+    padding-left:1.2rem;
+    position:relative;
+  }
+  .timeline-item ul li::before { content:'→'; position:absolute; left:0; color:var(--accent); }
+
+  /* ── CERTIFICATIONS ── */
+  .certs-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:1.2rem;
+  }
+  .cert-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:1.5rem;
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .cert-card:hover { transform:translateY(-3px); border-color:rgba(0,229,255,0.2); }
+  .cert-icon {
+    width:44px; height:44px; flex-shrink:0;
+    border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem;
+  }
+  .cert-card h4 { font-family:'Syne',sans-serif; font-weight:600; font-size:0.92rem; margin-bottom:0.2rem; }
+  .cert-card span { font-size:0.78rem; color:var(--accent); font-weight:500; }
+
+  /* ── CONTACT ── */
+  #contact {
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-glow {
+    position:absolute;
+    width:600px; height:600px;
+    background: radial-gradient(circle, rgba(123,97,255,0.1) 0%, transparent 70%);
+    border-radius:50%;
+    top:50%; left:50%; transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .contact-inner { position:relative; z-index:1; }
+  .contact-links {
+    display:flex;
+    justify-content:center;
+    gap:1.5rem;
+    flex-wrap:wrap;
+    margin-top:2.5rem;
+  }
+  .contact-link {
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:100px;
+    padding:0.7rem 1.5rem;
+    text-decoration:none;
+    color:var(--text);
+    font-size:0.9rem;
+    font-weight:500;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+  .contact-link svg { width:18px; height:18px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align:center;
+    padding:2rem 6%;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:0.82rem;
+  }
+  footer strong { color:var(--accent); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity:0; transform:translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width:768px) {
+    .hero-inner { grid-template-columns:1fr; }
+    .hero-card { display:none; }
+    .nav-links { display:none; }
+    .hero h1 { font-size:2.8rem; }
+    .hero-stats { gap:1.5rem; }
+  }
+</style>
 </head>
 <body>
-  <nav class="navbar" data-aos="fade-down">
-    <div class="container nav-container">
-      <h1 class="logo">Raghu Kalyan</h1>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><button id="mode-toggle">🌙</button></li>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RK<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">Open to Work · Entry-level Data Analyst</div>
+      <h1>Turning <em>Data</em> Into<br>Decisions.</h1>
+      <p class="hero-sub">Aspiring Data Analyst skilled in Excel, SQL, Python & Power BI — passionate about transforming raw data into clear, actionable insights.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects →</a>
+        <a href="mailto:raghukalyan0410@gmail.com" class="btn-outline">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="num">1<span>+</span></div>
+          <div class="label">Year Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">5<span>+</span></div>
+          <div class="label">Certifications</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">4<span>+</span></div>
+          <div class="label">Tools Mastered</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="avatar">RK</div>
+      <h3>Palasa Raghu Kalyan</h3>
+      <p>Data Analyst · Vijayawada, AP</p>
+      <div class="status-pill">Available for hire</div>
+      <div class="skill-badges">
+        <span class="badge">Excel</span>
+        <span class="badge">SQL</span>
+        <span class="badge">Python</span>
+        <span class="badge">Power BI</span>
+        <span class="badge">AWS</span>
+        <span class="badge">Oracle AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Core Skills &amp; Tools</h2>
+    <p class="section-sub">A hands-on skill set built through real projects, dashboards, and continuous learning.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:rgba(0,229,255,0.1);">📊</div>
+      <h3>Advanced Excel</h3>
+      <p>Pivot tables, VLOOKUP, Power Query, dynamic dashboards and complex formulas for data analysis.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span>90%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:rgba(123,97,255,0.1);">🗄️</div>
+      <h3>SQL</h3>
+      <p>Relational databases, joins, subqueries, aggregations, and data extraction for insight generation.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span>80%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:rgba(255,183,77,0.1);">🐍</div>
+      <h3>Python</h3>
+      <p>Data cleaning with Pandas, exploratory analysis with NumPy, and visualizations with Matplotlib/Seaborn.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span>75%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:rgba(0,229,255,0.1);">📈</div>
+      <h3>Data Visualization</h3>
+      <p>Building KPI dashboards, visual storytelling with charts, and Power BI report design.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span>85%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:rgba(255,100,100,0.1);">☁️</div>
+      <h3>AWS Cloud</h3>
+      <p>Solutions architecture fundamentals from the AWS APAC Job Simulation — cloud-aware data workflows.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span>65%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon" style="background:rgba(123,97,255,0.1);">🤖</div>
+      <h3>Oracle Cloud AI</h3>
+      <p>Oracle Cloud Infrastructure AI Foundation Associate — AI concepts applied to cloud analytics.</p>
+      <div class="skill-bar-wrap">
+        <div class="skill-bar-label"><span>Proficiency</span><span>70%</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-label">My Work</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Hands-on projects and dashboards built to solve real-world data problems.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#0d2030,#0a3040);">📊</div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">Excel</span><span class="project-tag">Power Query</span></div>
+        <h3>Sales Performance Dashboard</h3>
+        <p>Interactive Excel dashboard tracking KPIs, revenue trends, and regional performance using pivot tables and dynamic charts to support executive decisions.</p>
+        <a href="https://github.com/raghu-kalyan/Portfolio" target="_blank" class="project-link">View Project →</a>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#1a0d30,#2a1050);">🗃️</div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">SQL</span><span class="project-tag">Data Analysis</span></div>
+        <h3>Customer Segmentation Analysis</h3>
+        <p>SQL-based customer segmentation using RFM (Recency, Frequency, Monetary) analysis to identify high-value customers and churn patterns.</p>
+        <a href="https://github.com/raghu-kalyan/Portfolio" target="_blank" class="project-link">View Project →</a>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-thumb" style="background:linear-gradient(135deg,#0a2018,#102e20);">🐍</div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Pandas</span><span class="project-tag">Seaborn</span></div>
+        <h3>Exploratory Data Analysis</h3>
+        <p>End-to-end EDA pipeline using Pandas for cleaning and Seaborn/Matplotlib for rich visual storytelling — uncovering hidden patterns in datasets.</p>
+        <a href="https://github.com/raghu-kalyan/Portfolio" target="_blank" class="project-link">View Project →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-label">My Journey</div>
+    <h2 class="section-title">Experience &amp; Education</h2>
+    <p class="section-sub">From engineering foundations to data-driven impact.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">March 2025 – Present</div>
+      <h3>Data Analyst</h3>
+      <div class="company">K2YK Global Network · Vijayawada</div>
+      <ul>
+        <li>Designed data-driven visual reports and dashboards from raw data using Excel, SQL, and visualization tools.</li>
+        <li>Collaborated cross-functionally to deliver insights through charts, KPIs, and visual storytelling.</li>
+        <li>Supported informed decision-making by transforming complex data into clear, actionable narratives.</li>
       </ul>
     </div>
-  </nav>
-
-  <header class="hero-section" data-aos="fade-up">
-    <div class="container hero-content">
-      <img src="https://res.cloudinary.com/dwrdymsia/image/upload/v1750832091/PassportPic_ihlo0z.jpg" alt="Palasa Raghu Kalyan" class="profile-pic" />
-      <h1>Hello, I'm <span>Palasa Raghu Kalyan</span></h1>
-      <p>Aspiring Full Stack Developer passionate about Python & Web Development</p>
-      <a href="#projects" class="btn">View My Work</a>
-    </div>
-  </header>
-
-  <section id="about" class="about-section" data-aos="fade-right">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>Hi, I'm a Full Stack Developer passionate about Python and web technologies. I’ve built smart IoT systems, resume parsing tools, and full-featured websites. I'm always exploring, learning, and focused on creating meaningful tech experiences.</p>
-    </div>
-  </section>
-
-  <section id="skills" class="skills-section">
-    <div class="container">
-      <h2 data-aos="fade-up">Technical Skills</h2>
-      <ul class="skills">
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>Python</li>
-        <li>Django</li>
-        <li>MySQL</li>
-        <li>REST APIs</li>
-        <li>GitHub</li>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">June 2020 – April 2024</div>
+      <h3>B.Tech — Electrical, Electronics &amp; Communications Engineering</h3>
+      <div class="company">Kallam Haranadhareddy Institute of Technology</div>
+      <ul>
+        <li>Built strong analytical and problem-solving foundations through engineering coursework.</li>
+        <li>Developed interest in data systems and transitioned toward data analytics post-graduation.</li>
       </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="projects" class="projects-section">
-    <div class="container">
-      <h2 data-aos="fade-up">Projects</h2>
-      <div class="project-card" data-aos="fade-left">
-        <h3>IoT - Home Security System</h3>
-        <p>Built a smart home security solution with sensors and cloud-based alerts using Python and IoT protocols.</p>
-      </div>
-      <div class="project-card" data-aos="fade-right">
-        <h3>Resume Parser (HR Tool)</h3>
-        <p>Python-based resume parser using NLP libraries like spaCy to extract candidate information from PDFs.</p>
-      </div>
-      <div class="project-card" data-aos="fade-left">
-        <h3>eCommerce Website</h3>
-        <p>Developed a complete eCommerce site with HTML, CSS, JS – includes product browsing, dynamic cart, and checkout.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience" class="experience-section" data-aos="fade-up">
-    <div class="container">
-      <h2>Experience</h2>
-      <div class="experience-card" data-aos="zoom-in">
-        <h3>InternPe</h3>
-        <h4>Python Programming-Internship</h4>
-        <p><strong>Duration:</strong> 1 Month</p>
-        <p>Worked on Python scripts for automation and data handling. Improved logic building and backend code flow during this internship.</p>
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header reveal">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <p class="section-sub">Validated skills across data, cloud, and AI domains.</p>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon" style="background:rgba(0,229,255,0.1);">🗄️</div>
+      <div>
+        <h4>SQL and Relational Databases</h4>
+        <span>Data Management</span>
       </div>
     </div>
-  </section>
-
-  <section id="education" class="education-section" data-aos="zoom-in">
-    <div class="container">
-      <h2>Education</h2>
-      <ul class="education-list">
-        <li><strong>B.Tech</strong> - Kallam Haranadha Reddy Institute of Technology (CGPA: 7.37)</li>
-        <li><strong>Intermediate</strong> - Sri Chaitanya Junior College (CGPA: 6.09)</li>
-        <li><strong>SSC</strong> - Sri Chaitanya E.M High School (GPA: 10.0)</li>
-      </ul>
+    <div class="cert-card reveal">
+      <div class="cert-icon" style="background:rgba(123,97,255,0.1);">📊</div>
+      <div>
+        <h4>Data Analytics</h4>
+        <span>Analytics Fundamentals</span>
+      </div>
     </div>
-  </section>
-
-  <section id="contact" class="contact-section" data-aos="fade-up">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:raghukalyan0410@gmail.com">raghukalyan0410@gmail.com</a></p>
-      <p>Phone: <a href="tel:+917672082959">+91-7672082959</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/raghu-kalyan-palasa/" target="_blank">raghu-kalyan-palasa</a></p>
+    <div class="cert-card reveal">
+      <div class="cert-icon" style="background:rgba(255,183,77,0.1);">☁️</div>
+      <div>
+        <h4>AWS APAC Solutions Architecture</h4>
+        <span>Job Simulation · Amazon Web Services</span>
+      </div>
     </div>
-  </section>
+    <div class="cert-card reveal">
+      <div class="cert-icon" style="background:rgba(0,229,255,0.1);">🐍</div>
+      <div>
+        <h4>Python</h4>
+        <span>Programming & Data Analysis</span>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon" style="background:rgba(255,100,100,0.1);">🤖</div>
+      <div>
+        <h4>Oracle Cloud Infrastructure AI</h4>
+        <span>Foundation Associate · Oracle</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer data-aos="fade-up">
-    <p>© 2025 Palasa Raghu Kalyan</p>
-  </footer>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="contact-inner reveal">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Open to Opportunities</h2>
+    <p class="section-sub" style="margin:0 auto;">I'm actively looking for entry-level Data Analyst roles. If you have a data challenge, let's solve it together.</p>
+    <div class="contact-links">
+      <a href="mailto:raghukalyan0410@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        raghukalyan0410@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/raghu-kalyanpalasa" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/raghu-kalyan/Portfolio" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub Portfolio
+      </a>
+      <a href="tel:7672082959" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 7672082959
+      </a>
+    </div>
+  </div>
+</section>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
-    document.getElementById("mode-toggle").addEventListener("click", () => {
-      document.body.classList.toggle("light-mode");
-      const isLight = document.body.classList.contains("light-mode");
-      document.getElementById("mode-toggle").textContent = isLight ? "☀️" : "🌙";
+<!-- FOOTER -->
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
     });
-  </script>
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Animate skill bars when visible
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  bars.forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = '0';
+    const barObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setTimeout(() => { bar.style.width = w; }, 300);
+        barObserver.unobserve(bar);
+      }
+    });
+    barObserver.observe(bar);
+  });
+</script>
 </body>
 </html>
